@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Acessar Sistema Teste</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <style>
+            * {
+                font-size: 14px;
+                font-family: inherit;
+            }
+            .wrapper {
+                height: 100%;
+                min-height: 100%;
+                display: -ms-flex;
+                display: -webkit-flex;
+                display: flex;
+                -ms-align-items: center;
+                -webkit-align-items: center;
+                align-items: center;
+                -ms-justify-content: center;
+                -webkit-justify-content: center;
+                justify-content: center;
+            }
+
+        </style>
+    </h:head>
+    <h:body>
+        <h:form id="form">
+            <div class="wrapper">
+                <p:panel header="Logar no Sistema" style="text-align: center" id="painelinicial">
+                    <p:panelGrid columns="1" layout="grid" style="width:100%; margin: 0 auto;">
+                        <p:outputLabel value="Login:" for="login"/>
+                        <p:inputText id="login" value="#{loginControle.login}"/>
+                        <p:outputLabel value="Senha:" for="senha"/>
+                        <p:password id="senha" value="#{loginControle.senha}"/>
+                    </p:panelGrid>
+                    <f:facet name="footer">
+                        <p:commandButton value="Logar"
+                                         action="#{loginControle.logar()}"
+                                         ajax="true"
+                                         icon="ui-icon-circle-check"
+                                         style="width: 95px;">
+                        </p:commandButton>
+                        <p:commandButton value="Limpar"
+                                         icon="ui-icon-circle-triangle-w"
+                                         style="width: 95px;"
+                                         immediate="true"
+                                         type="reset">
+                        </p:commandButton>
+                    </f:facet>
+                </p:panel>
+            </div>
+        </h:form>
+    </h:body>
+</html>
