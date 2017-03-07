@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:a="http://xmlns.jcp.org/jsf">
+
+    <h:head>
+        <script type="text/javascript">
+            PrimeFaces.locales['pt_BR'] = {
+                closeText: 'Fechar',
+                prevText: 'Anterior',
+                nextText: 'Próximo',
+                currentText: 'Começo',
+                monthNames: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'],
+                monthNamesShort: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
+                dayNames: ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado'],
+                dayNamesShort: ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb'],
+                dayNamesMin: ['D', 'S', 'T', 'Q', 'Q', 'S', 'S'],
+                weekHeader: 'Semana',
+                firstDay: 1,
+                isRTL: false,
+                showMonthAfterYear: false,
+                yearSuffix: '',
+                timeOnlyTitle: 'Só Horas',
+                timeText: 'Tempo',
+                hourText: 'Hora',
+                minuteText: 'Minuto',
+                secondText: 'Segundo',
+                currentText: 'Data Atual',
+                        ampm: false,
+                month: 'Mês',
+                week: 'Semana',
+                day: 'Dia',
+                allDayText: 'Todo Dia'
+            };
+        </script>
+
+        <title>Oficina Mecânica</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <style>
+            ::-webkit-scrollbar { 
+                width: 8px; height: 8px; 
+            }
+            ::-webkit-scrollbar-track:enabled { 
+                background-color: #cccccc;
+            }
+            ::-webkit-scrollbar-thumb:horizontal, 
+            ::-webkit-scrollbar-thumb:vertical { 
+                background-color: #99ccff;
+            }
+            * {
+                font-family: sans-serif;
+                font-size: 14px;
+            }
+            .coluna10{
+                width: 10% !important;
+            }
+            .coluna15{
+                width: 15% !important;
+            }
+            .coluna20{
+                width: 20% !important;
+            }
+            .coluna45{
+                width: 45% !important;
+            }
+            .coluna50{
+                width: 50% !important;
+            }
+            .coluna80{
+                width: 80% !important;
+            }
+            .coluna85{
+                width: 85% !important;
+            }
+            .coluna90{
+                width: 90% !important;
+            }
+            .menu-sanfona li ul{
+                display:none;
+            }
+            .menu-sanfona li:focus ul{
+                display:block;
+            }
+            .tamanhocampos {
+                width: 400px;
+            }
+            .tamanho {
+                padding-right: 215px!important;
+            }
+        </style>
+    </h:head>
+    <h:body>
+
+        <p:layout fullPage="true">  
+
+            <p:layoutUnit position="north" size="40" header="Oficina Mecânica Paraná" style="text-align: center;"/>           
+            <p:layoutUnit position="south" size="40" header="Bem vindo(a) #{loginControle.usuario.identificacao}. Todos os direitos reservados." style="text-align: center;"/>
+            <p:layoutUnit position="west" size="235" header="Menu" resizable="false" closable="false" collapsible="true" style="text-align: center;"> 
+
+                <h:form>
+
+                    <p:accordionPanel style="width:215px; text-align: left">
+                        <p:tab title="Cadastros">
+                            <p:menu style="border: 0px; text-align: left">
+                                <p:menuitem value="Cargo" url="/app/cargo/list.xhtml" ajax="false" rendered="#{loginControle.usuario.nivelAcesso == 'ADMIN'}"/>
+                                <p:menuitem value="Cidade" url="/app/cidade/list.xhtml" ajax="false"/>
+                                <p:menuitem value="Cliente" url="/app/cliente/list.xhtml" ajax="false"/>
+                                <p:menuitem value="Estado" url="/app/estado/list.xhtml" ajax="false"/>
+                                <p:menuitem value="Fornecedor" url="/app/fornecedor/list.xhtml" ajax="false"/>
+                                <p:menuitem value="Funcionário" url="/app/funcionario/list.xhtml" ajax="false" rendered="#{loginControle.usuario.nivelAcesso == 'ADMIN'}"/>
+                                <p:menuitem value="Marca de produto" url="/app/marca_produto/list.xhtml" ajax="false"/>
+                                <p:menuitem value="País" url="/app/pais/list.xhtml" ajax="false"/>
+                                <p:menuitem value="Pedido" url="/app/pedido/list.xhtml" ajax="false"/>
+                                <p:menuitem value="Produto" url="/app/produto/list.xhtml" ajax="false"/>                               
+                                <p:menuitem value="Usuário" url="/app/usuario/list.xhtml" ajax="false" rendered="#{loginControle.usuario.nivelAcesso == 'ADMIN'}"/>     
+                            </p:menu>
+                        </p:tab>
+                        <p:tab title="Serviço / Venda">
+                            <p:menu style="border: 0px; text-align: left">
+                                <p:menuitem value="Serviço / Venda" url="/app/venda/list.xhtml" ajax="false"/>
+                            </p:menu>
+                        </p:tab>
+                        <p:tab title="Contas">
+                            <p:menu style="border: 0px; text-align: left">
+                                <p:menuitem value="Contas a receber" url="/app/contasreceber/list.xhtml" ajax="false"/>
+                                <p:menuitem value="Contas recebidas" url="/app/contasrecebidas/list.xhtml" ajax="false"/>
+                            </p:menu>
+                        </p:tab>
+                        <p:tab title="Relatórios Cadastrais" rendered="#{loginControle.usuario.nivelAcesso == 'ADMIN'}">
+                            <p:menu style="border: 0px; text-align: left">
+                                <p:menuitem value="Cargos" url="/app/relatorioCargo/form.xhtml" ajax="false"/>
+                                <p:menuitem value="Cidades" url="/app/relatorioCidade/form.xhtml" ajax="false"/>
+                                <p:menuitem value="Clientes" url="/app/relatorioCliente/form.xhtml" ajax="false"/> 
+                                <p:menuitem value="Estados" url="/app/relatorioEstado/form.xhtml" ajax="false"/>
+                                <p:menuitem value="Fornecedores" url="/app/relatorioFornecedor/form.xhtml" ajax="false"/>
+                                <p:menuitem value="Funcionários" url="/app/relatorioFuncionario/form.xhtml" ajax="false"/>
+                                <p:menuitem value="Marcas" url="/app/relatorioMarca/form.xhtml" ajax="false"/>   
+                                <p:menuitem value="Países" url="/app/relatorioPais/form.xhtml" ajax="false"/>   
+                                <p:menuitem value="Pedidos" url="/app/relatorioPedido/form.xhtml" ajax="false"/>
+                                <p:menuitem value="Produtos" url="/app/relatorioProduto/form.xhtml" ajax="false"/>
+                                <p:menuitem value="Usuários" url="/app/relatorioUsuario/form.xhtml" ajax="false"/>       
+                            </p:menu>
+                        </p:tab>
+                        <p:tab title="Relatórios Gerenciais">
+                            <p:menu style="border: 0px; text-align: left">
+                                <p:menuitem value="Cliente / Gastos" action="#{relatorioControle.relatorioCadastralClientesmaisgastaram()}" ajax="false"/>
+                                <p:menuitem value="Contas a Receber" url="/app/relatorioContasreceber/form.xhtml" ajax="false"/>
+                                <p:menuitem value="Contas Recebidas" url="/app/relatorioContasrecebidas/form.xhtml" ajax="false"/>
+                                <p:menuitem value="Serviços / Vendas" url="/app/relatorioVenda/form.xhtml" ajax="false"/>     
+                            </p:menu>
+                        </p:tab>
+                        <p:tab title="Empresa" rendered="#{loginControle.usuario.nivelAcesso == 'ADMIN'}">
+                            <p:menu style="border: 0px; text-align: left">
+                                <p:menuitem value="Cadastrar Empresa" url="/app/empresa/list.xhtml" ajax="false"/>
+                                <p:menuitem value="Relatório da Empresa" action="#{relatorioControle.relatorioCadastralEmpresa()}" ajax="false"/>
+                            </p:menu>
+                        </p:tab>
+                        <p:tab title="Voltar / Sair">
+                            <p:menu style="border: 0px; text-align: left">
+                                <p:menuitem value="Voltar" url="/app/index.xhtml" ajax="false" icon="ui-icon-circle-triangle-w"/>
+                                <p:menuitem value="Sair" action="#{loginControle.logoff()}" ajax="false" icon="ui-icon-power"/>
+                            </p:menu>
+                        </p:tab>
+                    </p:accordionPanel>
+
+                </h:form>
+
+            </p:layoutUnit>  
+
+            <p:layoutUnit position="center">                  
+                <ui:insert id="corpo" name="body"> 
+                    <h:form id="form">
+                        <p:panel style="text-align: center;" 
+                                 id="telainicial">
+                            <p:outputLabel value="Tela Inicial" style="text-align: center; 
+                                 font-family: sans-serif; 
+                                 font-size: 14px;"/>
+                        </p:panel>
+                    </h:form>
+                </ui:insert>          
+            </p:layoutUnit>  
+
+        </p:layout> 
+
+        <h:form>
+            <p:confirmDialog global="true" showEffect="fade" hideEffect="fade" width="25%" style="text-align: center">
+                <p:panel style="text-align: center">
+                    <p:commandButton value="Sim" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" style="width: 100px"/>
+                    <p:commandButton value="Não" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" style="width: 100px"/> 
+                </p:panel>
+            </p:confirmDialog>
+        </h:form>
+
+    </h:body>
+</html>

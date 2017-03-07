@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/WEB-INF/template.xhtml">
+
+        <ui:define name="body">
+
+            <h:form>
+                <p:panel header="Relatório de Clientes">
+                    <h:panelGrid columns="1">
+                        <p:outputLabel value="Filtrar - Nome:" for="nome"/>
+                        <p:inputText id="nome" 
+                             value="#{relatorioControle.nome}"
+                             styleClass="tamanhocampos"/>
+                    </h:panelGrid>
+                    <f:facet name="footer">
+                        <p:commandButton value="Gerar"
+                                         action="#{relatorioControle.relatorioCadastralCliente()}"
+                                         onclick="this.form.target = 'BLANK'"
+                                         ajax="false"
+                                         disabled="#{loginControle.usuario.nivelAcesso != 'ADMIN'}"/>
+                    </f:facet>
+                </p:panel>
+            </h:form>
+
+        </ui:define>
+
+    </ui:composition>
+
+</html>

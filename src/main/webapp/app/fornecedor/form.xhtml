@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <h:form rendered="#{fornecedorControle.fornecedor!=null}">
+
+        <p:panel id="painelForm" header="Cadastro de Fornecedor">
+            <p:panelGrid columns="2" 
+                         layout="grid"
+                         columnClasses="coluna50, coluna50">
+                <p:selectOneRadio value="#{fornecedorControle.fornecedor.tipo_pessoa}" valueChangeListener="#{fornecedorControle.novo()}">
+                    <f:selectItem itemValue="PF" itemLabel="Pessoa Fisica"/>
+                    <f:selectItem itemValue="PJ" itemLabel="Pessoa Juridica"/>
+                    <f:ajax event="change"
+                            render="painelForm"/>
+                </p:selectOneRadio>
+            </p:panelGrid>
+            <br/>
+            Obs: Ao alterar o tipo de pessoa, será iniciado um novo cadastro
+            <br/><br/>
+            <p:panelGrid columns="2" 
+                         layout="grid"
+                         columnClasses="coluna15, coluna85">
+
+                <p:outputLabel value="Data de cadastro:" 
+                               for="data"/>
+                <p:calendar id="data" 
+                            pattern="dd/MM/yyyy HH:mm:ss" 
+                            disabled="true"
+                            value="#{fornecedorControle.fornecedor.data_cadastro}"/>
+
+                <p:outputLabel value="Nome" for="nome" 
+                               rendered="#{fornecedorControle.fornecedor.tipo_pessoa=='PF'}"/>
+                <p:inputText id="nome"
+                             value="#{fornecedorControle.fornecedor.nome_razao}"
+                             rendered="#{fornecedorControle.fornecedor.tipo_pessoa=='PF'}"
+                             required="true"
+                             styleClass="tamanhocampos"/>
+
+                <p:outputLabel value="Razão Social" for="razao_social" 
+                               rendered="#{fornecedorControle.fornecedor.tipo_pessoa=='PJ'}"/>
+                <p:inputText id="razao_social"
+                             value="#{fornecedorControle.fornecedor.nome_razao}"
+                             rendered="#{fornecedorControle.fornecedor.tipo_pessoa=='PJ'}"
+                             required="true"
+                             styleClass="tamanhocampos"/>
+
+                <p:outputLabel value="Representante:" 
+                               for="rep"/>
+                <p:inputText id="rep" 
+                             value="#{fornecedorControle.fornecedor.representante}"
+                             required="true"
+                             styleClass="tamanhocampos"/>
+
+                <p:outputLabel value="CPF:" for="cpf" 
+                               rendered="#{fornecedorControle.fornecedor.tipo_pessoa=='PF'}"/>
+                <p:inputMask mask="999.999.999-99"
+                             id="cpf"
+                             value="#{fornecedorControle.fornecedor.cpf_cnpj}"
+                             rendered="#{fornecedorControle.fornecedor.tipo_pessoa=='PF'}"
+                             required="true"
+                             styleClass="tamanhocampos"/>
+
+                <p:outputLabel value="RG:" for="rg"
+                               rendered="#{fornecedorControle.fornecedor.tipo_pessoa=='PF'}"/>
+                <p:inputText id="rg" rendered="#{fornecedorControle.fornecedor.tipo_pessoa=='PF'}"
+                             value="#{fornecedorControle.fornecedor.rg_ie}"
+                             styleClass="tamanhocampos"/>
+
+                <p:outputLabel value="CNPJ:" for="cnpj"
+                               rendered="#{fornecedorControle.fornecedor.tipo_pessoa=='PJ'}"/>
+                <p:inputMask id="cnpj" mask="99.999.999/9999-99"
+                             value="#{fornecedorControle.fornecedor.cpf_cnpj}"
+                             rendered="#{fornecedorControle.fornecedor.tipo_pessoa=='PJ'}"
+                             required="true"
+                             styleClass="tamanhocampos"/>
+
+                <p:outputLabel value="IE:" for="ie"
+                               rendered="#{fornecedorControle.fornecedor.tipo_pessoa=='PJ'}"/>
+                <p:inputText value="#{fornecedorControle.fornecedor.rg_ie}"
+                             id="ie"
+                             rendered="#{fornecedorControle.fornecedor.tipo_pessoa=='PJ'}"
+                             styleClass="tamanhocampos"/>
+
+                <p:outputLabel value="Fone:"
+                               for="fone"/>
+                <p:inputText id="fone" 
+                             value="#{fornecedorControle.fornecedor.fone}"
+                             required="true"
+                             styleClass="tamanhocampos"/>
+
+                <p:outputLabel value="Cidade:" for="cidade"/>
+                <h:panelGroup>
+                    <p:autoComplete id="cidade"
+                                    completeMethod="#{cidadeControle.cidadeAutoComplete}"
+                                    value="#{fornecedorControle.fornecedor.cidade}"
+                                    converter="#{cidadeControle.converter()}"
+                                    var="cidade"
+                                    itemLabel="#{cidade.descricao}"
+                                    itemValue="#{cidade}"
+                                    required="true"/>
+                </h:panelGroup>
+
+                <p:outputLabel value="Endereço:" 
+                               for="end"/>
+                <p:inputText id="end" 
+                             value="#{fornecedorControle.fornecedor.endereco}"
+                             required="true"
+                             styleClass="tamanhocampos"/>
+
+                <p:outputLabel value="Bairro:" 
+                               for="bai"/>
+                <p:inputText id="bai" 
+                             value="#{fornecedorControle.fornecedor.bairro}"
+                             required="true"
+                             styleClass="tamanhocampos"/>
+
+                <p:outputLabel value="Complemento:" 
+                               for="comp"/>
+                <p:inputText id="comp" 
+                             value="#{fornecedorControle.fornecedor.complemento}"
+                             required="true"
+                             styleClass="tamanhocampos"/>
+
+                <p:outputLabel value="Número:" 
+                               for="num"/>
+                <p:inputText id="num" 
+                             value="#{fornecedorControle.fornecedor.numero}"
+                             required="true"
+                             styleClass="tamanhocampos"/>
+
+                <p:outputLabel value="Email:" 
+                               for="em"/>
+                <p:inputText id="em" 
+                             value="#{fornecedorControle.fornecedor.email}"
+                             styleClass="tamanhocampos"/>
+
+            </p:panelGrid>
+            <f:facet name="footer">
+                <p:commandButton value="Salvar"
+                                 icon="ui-icon-circle-check"
+                                 action="#{fornecedorControle.salvar()}"
+                                 ajax="true"
+                                 update="painelForm"/>
+                <p:commandButton value="Voltar"
+                                 onclick="history.go(-1)"
+                                 icon="ui-icon-circle-triangle-w">
+                    <p:confirm header="Confirmação" 
+                               icon="ui-icon-circle-triangle-e"
+                               message="Deseja voltar?"/>
+                </p:commandButton>
+            </f:facet>
+        </p:panel>
+
+    </h:form>
+
+</html>

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <p:panelGrid id="maoObra" columns="1" 
+                 layout="grid" 
+                 style="margin-bottom: 10px;"
+                 columnClasses="coluna20, coluna80">
+
+        <p:outputLabel value="Mão de Obra:" for="maodeobra"/>
+        <p:inputText disabled="#{vendaControle.flag}" 
+                     id="maodeobra" 
+                     value="#{vendaControle.maoDeObra.descricao}" styleClass="tamanhocampos"/>
+
+
+        <p:outputLabel value="Valor:" for="valor"/>
+        <p:inputText id="valor" disabled="#{vendaControle.flag}"
+                     value="#{vendaControle.maoDeObra.valor}">
+            <f:convertNumber minFractionDigits="2"
+                             maxFractionDigits="2"/>
+        </p:inputText>
+
+        <p:commandButton value="Adicionar"
+                         icon="ui-icon-circle-triangle-s"
+                         process="@parent"
+                         action="#{vendaControle.addItem2()}"
+                         update="table, maoObra, total, table3, desconto"
+                         disabled="#{vendaControle.flag}"/>
+
+    </p:panelGrid>
+
+    <br/>
+
+    <p:dataTable id="table" 
+                 value="#{vendaControle.venda.maoDeObra}"
+                 var="obra"
+                 paginator="true" rows="5"
+                 rowIndexVar="rowIndex"
+                 emptyMessage="Nenhum registro encontrado">
+
+        <p:column headerText="Descrição" width="40%" style="text-align:center">
+            <h:outputText value="#{obra.descricao}"/>
+        </p:column>
+
+        <p:column headerText="Valor" width="30%" style="text-align:center">
+            <h:outputText value="#{obra.valor}">
+                <f:convertNumber minFractionDigits="2"
+                                 maxFractionDigits="2"
+                                 type="currency"
+                                 currencySymbol="R$"/>
+            </h:outputText>
+
+        </p:column>
+
+        <p:column headerText="Remover" width="20%" style="text-align:center">
+            <p:commandButton value="Remover"
+                             icon="ui-icon-circle-triangle-n"
+                             action="#{vendaControle.removeItem2(obra)}"
+                             ajax="false"
+                             immediate="true"
+                             disabled="#{vendaControle.flag}"/>
+        </p:column>
+
+    </p:dataTable>
+
+</html>

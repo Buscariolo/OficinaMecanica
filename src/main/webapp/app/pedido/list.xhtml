@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/WEB-INF/template.xhtml">
+
+        <ui:define name="body">
+
+            <h:form rendered="#{pedidoControle.pedido==null}">
+                <p:dataTable value="#{pedidoControle.listagem}"
+                             var="item"
+                             paginator="true" rows="10"
+                             rowIndexVar="rowIndex"
+                             emptyMessage="Nenhum registro encontrado">
+
+                    <p:column headerText="Data de registro"  width="20%" style="text-align:center">
+                        <h:outputText value="#{item.data}">
+                            <f:convertDateTime pattern="dd/MM/yyyy"/>
+                        </h:outputText>
+                    </p:column>
+
+                    <p:column headerText="Cliente"  width="60%" style="text-align:center" filterBy="#{item.cliente.nome_razao}" filterMatchMode="contains">
+                        <h:outputText value="#{item.cliente.nome_razao}"/>
+                    </p:column>
+
+                    <p:column headerText="Opções" width="20%" style="text-align:center">
+                        <p:commandButton value="Alterar"
+                                         icon="ui-icon-pencil"
+                                         action="#{pedidoControle.setPedido(item)}"
+                                         ajax="false"/>
+
+                        <p:commandButton value="Excluir"
+                                         icon="ui-icon-trash"
+                                         action="#{pedidoControle.excluir(item)}">
+
+                            <p:confirm header="Confirmação" 
+                                       icon="ui-icon-circle-triangle-e"
+                                       message="Deseja excluir o registro?"/>
+
+                        </p:commandButton>
+                    </p:column>
+
+                </p:dataTable>
+                <br/>
+                <p:commandButton value="Novo"
+                                 icon="ui-icon-circle-plus"
+                                 action="#{pedidoControle.novo()}"
+                                 ajax="false"/>
+            </h:form>
+
+            <ui:include src="form.xhtml"/>
+
+        </ui:define>
+
+    </ui:composition>
+
+</html>

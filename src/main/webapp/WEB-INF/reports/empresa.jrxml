@@ -1,0 +1,431 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="empresa" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="6f39d19c-6064-49b4-9750-8991bec9d4c3">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString>
+		<![CDATA[SELECT
+     empresa.`emp_data_cadastro` AS empresa_emp_data_cadastro,
+     empresa.`emp_nome_fantasia` AS empresa_emp_nome_fantasia,
+     empresa.`emp_razao_social` AS empresa_emp_razao_social,
+     empresa.`pes_id` AS empresa_pes_id,
+     pessoa.`pes_id` AS pessoa_pes_id,
+     pessoa.`pes_bairro` AS pessoa_pes_bairro,
+     pessoa.`pes_complemento` AS pessoa_pes_complemento,
+     pessoa.`pes_cpf_cnpj` AS pessoa_pes_cpf_cnpj,
+     pessoa.`pes_email` AS pessoa_pes_email,
+     pessoa.`pes_endereco` AS pessoa_pes_endereco,
+     pessoa.`pes_fone` AS pessoa_pes_fone,
+     pessoa.`pes_numero` AS pessoa_pes_numero,
+     pessoa.`pes_rg_ie` AS pessoa_pes_rg_ie,
+     pessoa.`pes_cid` AS pessoa_pes_cid,
+     cidade.`cid_id` AS cidade_cid_id,
+     cidade.`cid_nome` AS cidade_cid_nome,
+     cidade.`cid_estado` AS cidade_cid_estado
+FROM
+     `pessoa` pessoa INNER JOIN `empresa` empresa ON pessoa.`pes_id` = empresa.`pes_id`
+     INNER JOIN `cidade` cidade ON pessoa.`pes_cid` = cidade.`cid_id`
+ORDER BY empresa_emp_nome_fantasia]]>
+	</queryString>
+	<field name="empresa_emp_data_cadastro" class="java.sql.Timestamp"/>
+	<field name="empresa_emp_nome_fantasia" class="java.lang.String"/>
+	<field name="empresa_emp_razao_social" class="java.lang.String"/>
+	<field name="empresa_pes_id" class="java.lang.Long"/>
+	<field name="pessoa_pes_id" class="java.lang.Long"/>
+	<field name="pessoa_pes_bairro" class="java.lang.String"/>
+	<field name="pessoa_pes_complemento" class="java.lang.String"/>
+	<field name="pessoa_pes_cpf_cnpj" class="java.lang.String"/>
+	<field name="pessoa_pes_email" class="java.lang.String"/>
+	<field name="pessoa_pes_endereco" class="java.lang.String"/>
+	<field name="pessoa_pes_fone" class="java.lang.String"/>
+	<field name="pessoa_pes_numero" class="java.lang.String"/>
+	<field name="pessoa_pes_rg_ie" class="java.lang.String"/>
+	<field name="pessoa_pes_cid" class="java.lang.Long"/>
+	<field name="cidade_cid_id" class="java.lang.Long"/>
+	<field name="cidade_cid_nome" class="java.lang.String"/>
+	<field name="cidade_cid_estado" class="java.lang.Long"/>
+	<group name="Group1">
+		<groupFooter>
+			<band/>
+		</groupFooter>
+	</group>
+	<group name="Group2">
+		<groupFooter>
+			<band/>
+		</groupFooter>
+	</group>
+	<group name="Group3">
+		<groupFooter>
+			<band/>
+		</groupFooter>
+	</group>
+	<group name="Group4">
+		<groupFooter>
+			<band/>
+		</groupFooter>
+	</group>
+	<background>
+		<band/>
+	</background>
+	<title>
+		<band height="72">
+			<frame>
+				<reportElement mode="Opaque" x="-20" y="-20" width="595" height="92" backcolor="#006699" uuid="f1aa927f-eeb7-418a-ae08-dd8bef1be0e6"/>
+				<staticText>
+					<reportElement x="0" y="20" width="395" height="43" forecolor="#FFFFFF" uuid="639e34a1-b1e5-4332-8f6f-23fb1436d952"/>
+					<textElement textAlignment="Center">
+						<font fontName="Times New Roman" size="22" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Oficina Mecânica Paraná]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="395" y="43" width="180" height="20" forecolor="#FFFFFF" uuid="4bb26810-be14-44c5-bb5d-c79a0fcc5f4b"/>
+					<textElement textAlignment="Center">
+						<font fontName="Times New Roman" size="16" isBold="false" isItalic="true" isUnderline="false" isStrikeThrough="false"/>
+					</textElement>
+					<text><![CDATA[Informações]]></text>
+				</staticText>
+			</frame>
+		</band>
+	</title>
+	<detail>
+		<band height="263">
+			<textField isStretchWithOverflow="true">
+				<reportElement x="198" y="64" width="357" height="20" uuid="8287245d-c392-4c7c-a68a-708dba86c116"/>
+				<box>
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{pessoa_pes_cpf_cnpj}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="19" width="555" height="1" uuid="0742b115-a272-4614-bc56-e8428d5b0cae"/>
+			</line>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="198" y="42" width="357" height="20" uuid="ce9b91a3-687c-47c8-a0cf-c169793d69cf"/>
+				<box>
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{empresa_emp_nome_fantasia}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="198" y="20" width="357" height="20" uuid="94f562ca-2b8b-4010-83d8-c4065fbeadd2"/>
+				<box>
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{empresa_emp_razao_social}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="64" width="198" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="ace81e3f-37fe-49db-8dcd-75148725a4d5"/>
+				<box>
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[CNPJ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="42" width="198" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="406a617c-52bf-42ec-b8be-2586a35b7436"/>
+				<box>
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nome Fantasia]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="20" width="198" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="281f74dc-aed8-4cd1-b9bc-74733c9f7049"/>
+				<box>
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Razão Social]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="130" width="198" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="65b51f07-c395-4459-abe3-eea147599bab"/>
+				<box>
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Endereço]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="152" width="198" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="32e61371-b423-4f41-a402-c5ebf0fa7579"/>
+				<box>
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Número]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="174" width="198" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="a8220af8-c4c0-4e1a-b16e-dd0d76ee0d1b"/>
+				<box>
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Bairro]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="196" width="198" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="5f89d860-e08d-47d9-8b52-73c64e88bdc5"/>
+				<box>
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Complemento]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="218" width="198" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="58705cb0-0c4c-46ed-afc7-cbe29f85a64e"/>
+				<box>
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fone]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="86" width="198" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="2bc214a7-9966-45a3-b795-1e65c647987e"/>
+				<box>
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Inscrição Estadual]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="108" width="198" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="72c29e85-c957-4494-a619-347140321ae5"/>
+				<box>
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Cidade]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="240" width="198" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="5348c65c-f65e-4b9e-914f-6599a567b678"/>
+				<box>
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Email]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="198" y="86" width="357" height="20" uuid="dae9cbe4-6cf6-4408-9fc8-8c649ea9713c"/>
+				<box>
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{pessoa_pes_rg_ie}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="198" y="108" width="357" height="20" uuid="b02edb6b-f04d-489b-86cc-0d71af7529f4"/>
+				<box>
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{cidade_cid_nome}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="198" y="130" width="357" height="20" uuid="0f547bb8-8834-4639-b6b4-86c367008109"/>
+				<box>
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{pessoa_pes_endereco}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="198" y="152" width="357" height="20" uuid="3395803b-8cb2-448d-b8b8-aa94b97910cb"/>
+				<box>
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{pessoa_pes_numero}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="198" y="174" width="357" height="20" uuid="6bcd722b-95ff-4181-9584-c39eb3252a35"/>
+				<box>
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{pessoa_pes_bairro}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="198" y="196" width="357" height="20" uuid="c7fda482-896e-4ac1-a075-bdb88c94e183"/>
+				<box>
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{pessoa_pes_complemento}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="198" y="218" width="357" height="20" uuid="4e9df5ed-c39f-4e1f-a9cb-bfa627e66f2a"/>
+				<box>
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{pessoa_pes_fone}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="198" y="240" width="357" height="20" uuid="06214b36-5a0f-46a9-aef3-278f1c2f8e03"/>
+				<box>
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{pessoa_pes_email}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band/>
+	</columnFooter>
+	<pageFooter>
+		<band height="17">
+			<textField>
+				<reportElement mode="Opaque" x="0" y="4" width="515" height="13" backcolor="#E6E6E6" uuid="5c6667c5-1f5e-4e73-a0b2-c7c9838d008c"/>
+				<textElement textAlignment="Right">
+					<font fontName="Times New Roman"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Página "+$V{PAGE_NUMBER}+" de"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement mode="Opaque" x="515" y="4" width="40" height="13" backcolor="#E6E6E6" uuid="3dc5dc02-6ba2-42df-8759-0ca99a521875"/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy HH:mm:ss">
+				<reportElement x="0" y="4" width="100" height="13" uuid="13e87f8a-cbbb-478b-be7d-8eb8a4e09bb8"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band/>
+	</summary>
+</jasperReport>

@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/WEB-INF/template.xhtml">
+
+        <ui:define name="body">
+
+            <h:form rendered="#{produtoControle.produto==null}">
+                <p:dataTable value="#{produtoControle.listagem}"
+                             var="item"
+                             paginator="true" rows="10"
+                             rowIndexVar="rowIndex"
+                             emptyMessage="Nenhum registro encontrado">
+
+                    <p:column headerText="Numeração" width="11%" style="text-align:center" filterBy="#{item.codigo}" filterMatchMode="contains"> 
+                        <h:outputText value="#{item.codigo}"/>
+                    </p:column>
+
+                    <p:column headerText="Nome" width="12%" style="text-align:center" filterBy="#{item.nome}" filterMatchMode="contains">
+                        <h:outputText value="#{item.nome}"/>
+                    </p:column>
+                    
+                    <p:column headerText="Veículos Aplicáveis" width="15%" style="text-align:center">
+                        <h:outputText value="#{item.veiculos}"/>
+                    </p:column>
+                    
+                    <p:column headerText="Detalhes" width="15%" style="text-align:center">
+                        <h:outputText value="#{item.detalhes}"/>
+                    </p:column>
+
+                    <p:column headerText="Preço" width="10%" style="text-align:center">
+                        <h:outputText value="#{item.preco}">
+                            <f:convertNumber minFractionDigits="2"
+                                             maxFractionDigits="2"
+                                             type="currency"
+                                             currencySymbol="R$"/>
+                        </h:outputText>
+                    </p:column>
+
+                    <p:column headerText="Estoque" width="7%" style="text-align:center">
+                        <h:outputText value="#{item.estoque}">
+                            <f:convertNumber minFractionDigits="0"
+                                             maxFractionDigits="0"/>
+                        </h:outputText>
+                    </p:column>
+
+                    <p:column headerText="Marca" width="10%" style="text-align:center">
+                        <h:outputText value="#{item.marca.nome}"/>
+                    </p:column>
+
+                    <p:column headerText="Opções" width="20%" style="text-align:center">
+                        <p:commandButton value="Alterar"
+                                         icon="ui-icon-pencil"
+                                         action="#{produtoControle.setProduto(item)}"
+                                         ajax="false"/>
+
+                        <p:commandButton value="Excluir"
+                                         icon="ui-icon-trash"
+                                         action="#{produtoControle.excluir(item)}">
+
+                            <p:confirm header="Confirmação" 
+                                       message="Deseja excluir o registro?" 
+                                       icon="ui-icon-circle-triangle-e" />
+
+                        </p:commandButton>
+                    </p:column>
+
+                </p:dataTable>
+                <br/>
+                <p:commandButton value="Novo"
+                                 icon="ui-icon-circle-plus"
+                                 action="#{produtoControle.novo()}"
+                                 ajax="false"/>
+            </h:form>
+
+            <ui:include src="form.xhtml"/>
+
+        </ui:define>
+
+    </ui:composition>
+
+</html>

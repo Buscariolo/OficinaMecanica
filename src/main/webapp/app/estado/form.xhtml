@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <h:form rendered="#{estadoControle.estado!=null}">
+
+        <p:panel header="Cadastro de Estado" id="panel">
+            <p:panelGrid columns="2" 
+                         layout="grid" 
+                         columnClasses="coluna10, coluna90">
+
+                <p:outputLabel value="Estado:" 
+                               for="estado"/>
+                <p:inputText id="estado" 
+                             value="#{estadoControle.estado.nome}"
+                             required="true"
+                             styleClass="tamanhocampos"/>
+
+                <p:outputLabel value="Sigla:" 
+                               for="sigla"/>
+                <p:inputMask mask="aa" 
+                             id="sigla" 
+                             value="#{estadoControle.estado.sigla}"
+                             required="true"
+                             styleClass="tamanhocampos"/>
+                
+                <p:outputLabel value="País:" for="pais"/>
+                <h:panelGroup>
+                    <p:autoComplete id="pais"
+                                    completeMethod="#{paisControle.paisAutoComplete}"
+                                    value="#{estadoControle.estado.pais}"
+                                    converter="#{paisControle.converter()}"
+                                    var="pais"
+                                    itemLabel="#{pais.nome}"
+                                    itemValue="#{pais}"
+                                    required="true"/>
+                </h:panelGroup>
+
+            </p:panelGrid>
+            <f:facet name="footer">
+                <p:commandButton value="Salvar"
+                                 icon="ui-icon-circle-check"
+                                 action="#{estadoControle.salvar()}"
+                                 ajax="true"
+                                 update="panel"/>
+                <p:commandButton value="Voltar"
+                                 onclick="history.go(-1)"
+                                 icon="ui-icon-circle-triangle-w">
+                    <p:confirm header="Confirmação" 
+                               icon="ui-icon-circle-triangle-e"
+                               message="Deseja voltar?"/>
+                </p:commandButton>
+            </f:facet>
+        </p:panel>
+
+    </h:form>
+
+</html>

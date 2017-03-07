@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <p:panelGrid id="painelParcelas" columns="1"
+                 layout="grid"
+                 style="margin-bottom: 10px;"
+                 columnClasses="coluna20, coluna80">  
+
+        <p:outputLabel value="Quantidade Parcelas:" for="qntparcelas"/>
+        <p:inputText id="qntparcelas" value="#{vendaControle.venda.quantidadeParcelas}" maxlength="12" disabled="#{vendaControle.flag}">
+            <p:ajax update="botaogerar" event="keyup"/>
+        </p:inputText>
+
+        <p:outputLabel value="Primeira Parcela:" for="datparc"/>
+        <p:calendar id="datparc" disabled="#{vendaControle.flag}"
+                    pattern="dd/MM/yyyy"
+                    value="#{vendaControle.dataPrimeiraParcela}"/>
+
+
+        <p:commandButton value="Gerar" 
+                         id="botaogerar"
+                         disabled="#{vendaControle.venda.quantidadeParcelas == null || vendaControle.flag}"
+                         update="table3, painelParcelas" 
+                         icon="ui-icon-circle-triangle-s"
+                         action="#{vendaControle.geraParcelas()}"
+                         process="@parent"/>
+
+    </p:panelGrid>
+
+    <br/>
+
+    <p:dataTable value="#{vendaControle.venda.listaContasReceber}" 
+                 var="pag"
+                 paginator="true" rows="12"
+                 rowIndexVar="rowIndex"
+                 id="table3"
+                 emptyMessage="Nenhum registro encontrado">
+
+        <p:column headerText="Vencimento" width="40%" style="text-align:center">
+            <h:outputText value="#{pag.dataVencimento}">
+                <f:convertDateTime pattern="dd/MM/yyyy"/>
+            </h:outputText>
+        </p:column>
+
+        <p:column headerText="Parcela" width="30%" style="text-align:center">
+            #{pag.parcela}
+        </p:column>
+
+        <p:column headerText="Valor" width="30%" style="text-align:center">
+            <h:outputText value="#{pag.valor}">
+                <f:convertNumber minFractionDigits="2"
+                                 maxFractionDigits="2"
+                                 type="currency"
+                                 currencySymbol="R$"/>
+            </h:outputText>
+
+        </p:column>
+
+    </p:dataTable>
+
+</html>

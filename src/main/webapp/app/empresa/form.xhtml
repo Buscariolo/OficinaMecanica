@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <h:form rendered="#{empresaControle.empresa!=null}">
+
+        <p:panel header="Cadastro da Empresa" id="panel">
+            <p:panelGrid columns="2" 
+                         layout="grid"
+                         columnClasses="coluna15, coluna85">
+
+                <p:outputLabel value="Data de cadastro:" 
+                               for="data"/>
+                <p:calendar id="data" 
+                            pattern="dd/MM/yyyy HH:mm:ss" 
+                            disabled="true"
+                            value="#{empresaControle.empresa.data_cadastro}"/>
+
+                <p:outputLabel value="Razão Social:" 
+                               for="nome_razao"/>
+                <p:inputText id="nome_razao" 
+                             value="#{empresaControle.empresa.razao_social}"
+                             required="true"
+                             styleClass="tamanhocampos"/>
+
+                <p:outputLabel value="Nome Fantasia:" 
+                               for="nome_fantasia"/>
+                <p:inputText id="nome_fantasia" 
+                             value="#{empresaControle.empresa.nome_fantasia}"
+                             required="true"
+                             styleClass="tamanhocampos"/>
+
+                <p:outputLabel value="CNPJ:" 
+                               for="cnpj"/>
+                <p:inputMask mask="99.999.999/9999-99"
+                             id="cnpj" 
+                             value="#{empresaControle.empresa.cpf_cnpj}"
+                             required="true"
+                             styleClass="tamanhocampos"/>
+
+                <p:outputLabel value="IE:" 
+                               for="ie"/>
+                <p:inputText id="ie" 
+                             value="#{empresaControle.empresa.rg_ie}"
+                             styleClass="tamanhocampos"/>
+
+                <p:outputLabel value="Fone:"
+                               for="fone"/>
+                <p:inputText id="fone" 
+                             value="#{empresaControle.empresa.fone}"
+                             styleClass="tamanhocampos"/>
+
+                <p:outputLabel value="Cidade:" 
+                               for="cidade"/>
+                <p:selectOneMenu id="cidade"
+                                 value="#{empresaControle.empresa.cidade}"
+                                 converter="#{cidadeControle.converter()}"
+                                 required="true"
+                                 style="width: 400px;">
+
+                    <f:selectItem itemLabel="Selecionar cidade..."
+                                  itemValue="null"/>
+                    <f:selectItems value="#{cidadeControle.listagem}"
+                                   var="item"
+                                   itemLabel="#{item.nome} - #{item.estado.sigla}"
+                                   itemValue="#{item}"/>
+                </p:selectOneMenu>
+
+                <p:outputLabel value="Endereço:" 
+                               for="end"/>
+                <p:inputText id="end" 
+                             value="#{empresaControle.empresa.endereco}"
+                             required="true"
+                             styleClass="tamanhocampos"/>
+
+                <p:outputLabel value="Bairro:" 
+                               for="bai"/>
+                <p:inputText id="bai" 
+                             value="#{empresaControle.empresa.bairro}"
+                             required="true"
+                             styleClass="tamanhocampos"/>
+
+                <p:outputLabel value="Complemento:" 
+                               for="comp"/>
+                <p:inputText id="comp" 
+                             value="#{empresaControle.empresa.complemento}"
+                             styleClass="tamanhocampos"/>
+
+                <p:outputLabel value="Número:" 
+                               for="num"/>
+                <p:inputText id="num" 
+                             value="#{empresaControle.empresa.numero}"
+                             styleClass="tamanhocampos"/>
+
+                <p:outputLabel value="Email:" 
+                               for="em"/>
+                <p:inputText id="em" 
+                             value="#{empresaControle.empresa.email}"
+                             styleClass="tamanhocampos"/> 
+
+            </p:panelGrid>
+            <f:facet name="footer">
+                <p:commandButton value="Salvar"
+                                 icon="ui-icon-circle-check"
+                                 action="#{empresaControle.salvar()}"
+                                 ajax="true"
+                                 update="panel"/>
+                <p:commandButton value="Voltar"
+                                 onclick="history.go(-1)"
+                                 icon="ui-icon-circle-triangle-w">
+                    <p:confirm header="Confirmação" 
+                               icon="ui-icon-circle-triangle-e"
+                               message="Deseja voltar?"/>
+                </p:commandButton>
+            </f:facet>
+        </p:panel>
+
+    </h:form>
+
+</html>

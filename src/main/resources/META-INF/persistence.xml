@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.0" xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
+  <persistence-unit name="mecanicaPU" transaction-type="RESOURCE_LOCAL">
+    <provider>org.hibernate.ejb.HibernatePersistence</provider>
+    <class>entidades.Cargo</class>
+    <class>entidades.Cidade</class>
+    <class>entidades.Estado</class>
+    <class>entidades.Pais</class>
+    <class>entidades.Marca</class>
+    <class>entidades.Pessoa</class>
+    <class>entidades.Fornecedor</class>
+    <class>entidades.Cliente</class>
+    <class>entidades.Empresa</class>
+    <class>entidades.Funcionario</class>
+    <class>entidades.ItemVenda</class>
+    <class>entidades.Pedido</class>
+    <class>entidades.Produto</class>
+    <class>entidades.Venda</class>
+    <class>entidades.Usuario</class>
+    <class>entidades.MaoDeObra</class>
+    <class>entidades.ContasReceber</class>
+    <exclude-unlisted-classes>false</exclude-unlisted-classes>
+    <properties>
+      <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/oficinamecanica?zeroDateTimeBehavior=convertToNull"/>
+      <property name="javax.persistence.jdbc.user" value="root"/>
+      <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
+      <property name="javax.persistence.jdbc.password" value="root"/>
+      <property name="hibernate.hbm2ddl.auto" value="update"/>
+      <property name="hibernate.show_sql" value="true"/>
+      <property name="hibernate.format_sql" value="true"/>
+    </properties>
+  </persistence-unit>
+</persistence>

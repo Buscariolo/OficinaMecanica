@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <h:form rendered="#{produtoControle.produto!=null}">
+
+        <p:panel header="Cadastro de Produto" id="panel">
+            <p:panelGrid columns="2" 
+                         layout="grid"
+                         columnClasses="coluna10, coluna90">
+
+                <p:outputLabel value="Numeração:" for="codigo"/>
+                <p:inputText id="codigo" 
+                             value="#{produtoControle.produto.codigo}"
+                             required="true"
+                             styleClass="tamanhocampos"/>
+
+                <p:outputLabel value="Nome:" for="nome"/>
+                <p:inputText id="nome" 
+                             value="#{produtoControle.produto.nome}"
+                             required="true"
+                             styleClass="tamanhocampos"/>
+
+                <p:outputLabel value="Preço:" for="preco"/>
+                <p:inputText id="preco" 
+                             value="#{produtoControle.produto.preco}"
+                             required="true"
+                             styleClass="tamanhocampos">
+                    <f:convertNumber minFractionDigits="2"
+                                     maxFractionDigits="2"/>
+                </p:inputText>
+
+                <p:outputLabel value="Estoque:" for="estoque"/>
+                <p:inputText id="estoque" 
+                             value="#{produtoControle.produto.estoque}"
+                             required="true"
+                             styleClass="tamanhocampos">
+                    <f:convertNumber minFractionDigits="0"
+                                     maxFractionDigits="0"/>
+                </p:inputText>
+
+                <p:outputLabel value="Marca" for="marca"/>
+                <h:panelGroup>
+                    <p:autoComplete id="marca"
+                                    completeMethod="#{marcaControle.marcaAutoComplete}"
+                                    value="#{produtoControle.produto.marca}"
+                                    converter="#{marcaControle.converter()}"
+                                    var="marca"
+                                    itemLabel="#{marca.nome}"
+                                    itemValue="#{marca}"
+                                    required="true"/>
+                </h:panelGroup>
+
+                <p:outputLabel value="Veículos Aplicáveis:" 
+                               for="veiculos"/>
+                <p:inputText id="veiculos" 
+                             value="#{produtoControle.produto.veiculos}"
+                             styleClass="tamanhocampos"/>
+
+                <p:outputLabel value="Fornecedor:" for="fornecedor"/>
+                <h:panelGroup>
+                    <p:autoComplete id="fornecedor"
+                                    completeMethod="#{fornecedorControle.fornecedorAutoComplete}"
+                                    value="#{produtoControle.produto.fornecedor}"
+                                    converter="#{fornecedorControle.converter()}"
+                                    var="fornecedor"
+                                    itemLabel="#{fornecedor.nome_razao}"
+                                    itemValue="#{fornecedor}"
+                                    required="true"/>
+                </h:panelGroup>
+
+                <p:outputLabel value="Detalhes do produto:" 
+                               for="detalhes"/>
+                <p:inputText id="detalhes" 
+                             value="#{produtoControle.produto.detalhes}"
+                             styleClass="tamanhocampos"/>
+
+            </p:panelGrid>
+            <f:facet name="footer">
+                <p:commandButton value="Salvar"
+                                 icon="ui-icon-circle-check"
+                                 action="#{produtoControle.salvar()}"
+                                 ajax="true"
+                                 update="panel"/>
+                <p:commandButton value="Voltar"
+                                 onclick="history.go(-1)"
+                                 icon="ui-icon-circle-triangle-w">
+                    <p:confirm header="Confirmação" 
+                               icon="ui-icon-circle-triangle-e"
+                               message="Deseja voltar?"/>
+                </p:commandButton>
+            </f:facet>
+        </p:panel>
+
+    </h:form>
+
+</html>

@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="/WEB-INF/template.xhtml">
+
+        <ui:define name="body">
+
+            <h:form rendered="#{fornecedorControle.fornecedor==null}">
+                <p:dataTable value="#{fornecedorControle.listagem}"
+                             var="item"
+                             paginator="true" rows="10"
+                             rowIndexVar="rowIndex"
+                             emptyMessage="Nenhum registro encontrado">
+
+                    <p:column headerText="Fornecedor"  width="25%" style="text-align:center" filterBy="#{item.cliente.nome_razao}" filterMatchMode="contains">
+                        <h:outputText value="#{item.nome_razao}"/>
+                    </p:column>
+
+                    <p:column headerText="Fone"  width="15%" style="text-align:center">
+                        <h:outputText value="#{item.fone}"/>
+                    </p:column>
+
+                    <p:column headerText="Cidade"  width="15%" style="text-align:center">
+                        <h:outputText value="#{item.cidade.nome}"/>
+                    </p:column>
+
+                    <p:column headerText="Endereço"  width="15%" style="text-align:center">
+                        <h:outputText value="#{item.endereco}"/>
+                    </p:column>
+
+                    <p:column headerText="Número"  width="10%" style="text-align:center">
+                        <h:outputText value="#{item.numero}"/>
+                    </p:column>
+
+                    <p:column headerText="Opções" width="20%" style="text-align:center">
+                        <p:commandButton value="Alterar"
+                                         icon="ui-icon-pencil"
+                                         action="#{fornecedorControle.setFornecedor(item)}"
+                                         ajax="false"
+                                         disabled="#{loginControle.usuario.nivelAcesso != 'ADMIN'}"/>
+
+                        <p:commandButton value="Excluir"
+                                         icon="ui-icon-trash"
+                                         action="#{fornecedorControle.excluir(item)}"
+                                         disabled="#{loginControle.usuario.nivelAcesso != 'ADMIN'}">
+
+                            <p:confirm header="Confirmação" 
+                                       icon="ui-icon-circle-triangle-e"
+                                       message="Deseja excluir o registro?"/>
+
+                        </p:commandButton>
+                    </p:column>
+
+                </p:dataTable>
+                <br/>
+                <p:commandButton value="Novo"
+                                 icon="ui-icon-circle-plus"
+                                 action="#{fornecedorControle.novo()}"
+                                 ajax="false"
+                                 disabled="#{loginControle.usuario.nivelAcesso != 'ADMIN'}"/>
+            </h:form>
+
+            <ui:include src="form.xhtml"/>
+
+        </ui:define>
+
+    </ui:composition>
+
+</html>

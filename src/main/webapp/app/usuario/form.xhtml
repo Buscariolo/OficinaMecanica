@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <h:form rendered="#{usuarioControle.usuario!=null}">
+
+        <p:panel header="Cadastro de Usuário" id="panel">
+            <p:panelGrid columns="2" layout="grid" columnClasses="coluna20, coluna80" id="grid">      
+
+                <p:outputLabel value="Funcionário:" for="funcionario"/>
+                <h:panelGroup>
+                    <p:autoComplete id="funcionario" disabled="#{usuarioControle.flag}"
+                                    completeMethod="#{funcionarioControle.funcionarioAutoComplete}"
+                                    value="#{usuarioControle.usuario.funcionario}"
+                                    converter="#{funcionarioControle.converter()}"
+                                    var="funcionario"
+                                    itemLabel="#{funcionario.nome}"
+                                    itemValue="#{funcionario}"/>
+                    <p:focus for="funcionario" rendered="#{usuarioControle.usuario.funcionario==null}"/>
+                </h:panelGroup>
+
+                <p:outputLabel value="Identificação / Apelido:" for="identificacao" />
+                <p:inputText id="identificacao" 
+                             value="#{usuarioControle.usuario.identificacao}"
+                             required="true"
+                             styleClass="tamanhocampos"/>
+
+                <p:outputLabel value="Login:" for="login" />
+                <p:inputText id="login" disabled="#{usuarioControle.flag}"
+                             value="#{usuarioControle.usuario.login}"
+                             required="true"
+                             styleClass="tamanhocampos"/>
+
+                <p:outputLabel value="Senha:" for="senha"/>
+                <p:password id="senha" 
+                            value="#{usuarioControle.usuario.senha}"
+                            required="true"
+                            styleClass="tamanhocampos"/>
+
+                <p:outputLabel value="Nível acesso:" for="nivel"/>
+                <p:selectOneMenu id="nivel" 
+                                 value="#{usuarioControle.usuario.nivelAcesso}"
+                                 style="width: 400px;">
+                    <f:selectItems value="#{usuarioControle.niveisAcesso}"
+                                   var="nivel"
+                                   itemValue="#{nivel}"
+                                   itemLabel="#{nivel.descricao}"/>
+                </p:selectOneMenu>
+
+            </p:panelGrid>
+            <f:facet name="footer">
+                <p:commandButton value="Salvar"
+                                 ajax="true"
+                                 update="panel"
+                                 icon="ui-icon-circle-check"
+                                 action="#{usuarioControle.salvar()}"/>
+                <p:commandButton value="Voltar"
+                                 action="#{usuarioControle.voltar()}"
+                                 icon="ui-icon-circle-triangle-w"
+                                 immediate="true">
+                    <p:confirm header="Confirmação" 
+                               icon="ui-icon-circle-triangle-e"
+                               message="Deseja voltar?"/>
+                </p:commandButton>
+            </f:facet>
+        </p:panel>
+
+    </h:form>
+
+</html>

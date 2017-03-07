@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <h:form rendered="#{funcionarioControle.funcionario!=null}">
+
+        <p:panel header="Cadastro de Funcionário" id="panel">
+            <p:panelGrid columns="2" 
+                         layout="grid"
+                         columnClasses="coluna15, coluna85">
+
+                <p:outputLabel value="Data de admissão" 
+                               for="data"/>
+                <p:calendar id="data" 
+                            pattern="dd/MM/yyyy"
+                            value="#{funcionarioControle.funcionario.data}" 
+                            required="true"/>
+
+                <p:outputLabel value="Nome:" 
+                               for="nome"/>
+                <p:inputText id="nome" 
+                             value="#{funcionarioControle.funcionario.nome}"
+                             required="true"
+                             styleClass="tamanhocampos"/>
+
+                <p:outputLabel value="CPF:" 
+                               for="cpf"/>
+                <p:inputMask mask="999.999.999-99"
+                             id="cpf" 
+                             value="#{funcionarioControle.funcionario.cpf_cnpj}"
+                             required="true"
+                             styleClass="tamanhocampos"/>
+
+                <p:outputLabel value="RG:" 
+                               for="rg"/>
+                <p:inputText id="rg" 
+                             value="#{funcionarioControle.funcionario.rg_ie}"
+                             styleClass="tamanhocampos"/>
+
+                <p:outputLabel value="Salário:" 
+                               for="salario"/>
+                <p:inputText id="salario" 
+                             value="#{funcionarioControle.funcionario.salario}"
+                             required="true"
+                             styleClass="tamanhocampos">
+                    <f:convertNumber minFractionDigits="2"
+                                     maxFractionDigits="2"/>
+                </p:inputText>
+
+                <p:outputLabel value="Cargo:" for="cargo"/>
+                <h:panelGroup>
+                    <p:autoComplete id="cargo"
+                                    completeMethod="#{cargoControle.cargoAutoComplete}"
+                                    value="#{funcionarioControle.funcionario.cargo}"
+                                    converter="#{cargoControle.converter()}"
+                                    var="cargo"
+                                    itemLabel="#{cargo.nome}"
+                                    itemValue="#{cargo}"
+                                    required="true"/>
+                </h:panelGroup>
+
+                <p:outputLabel value="Fone:"
+                               for="fone"/>
+                <p:inputText id="fone" 
+                             value="#{funcionarioControle.funcionario.fone}"
+                             required="true"
+                             styleClass="tamanhocampos"/>
+
+                <p:outputLabel value="Cidade:" for="cidade"/>
+                <h:panelGroup>
+                    <p:autoComplete id="cidade"
+                                    completeMethod="#{cidadeControle.cidadeAutoComplete}"
+                                    value="#{funcionarioControle.funcionario.cidade}"
+                                    converter="#{cidadeControle.converter()}"
+                                    var="cidade"
+                                    itemLabel="#{cidade.descricao}"
+                                    itemValue="#{cidade}"
+                                    required="true"/>
+                </h:panelGroup>
+
+                <p:outputLabel value="Endereço:" 
+                               for="end"/>
+                <p:inputText id="end" 
+                             value="#{funcionarioControle.funcionario.endereco}"
+                             required="true"
+                             styleClass="tamanhocampos"/>
+
+                <p:outputLabel value="Bairro:" 
+                               for="bai"/>
+                <p:inputText id="bai" 
+                             value="#{funcionarioControle.funcionario.bairro}"
+                             required="true"
+                             styleClass="tamanhocampos"/>
+
+                <p:outputLabel value="Complemento:" 
+                               for="comp"/>
+                <p:inputText id="comp" 
+                             value="#{funcionarioControle.funcionario.complemento}"
+                             required="true"
+                             styleClass="tamanhocampos"/>
+
+                <p:outputLabel value="Número:" 
+                               for="num"/>
+                <p:inputText id="num" 
+                             value="#{funcionarioControle.funcionario.numero}"
+                             required="true"
+                             styleClass="tamanhocampos"/>
+
+                <p:outputLabel value="Email:" 
+                               for="em"/>
+                <p:inputText id="em" 
+                             value="#{funcionarioControle.funcionario.email}"
+                             styleClass="tamanhocampos"/>
+
+            </p:panelGrid>
+            <f:facet name="footer">
+                <p:commandButton value="Salvar"
+                                 icon="ui-icon-circle-check"
+                                 action="#{funcionarioControle.salvar()}"
+                                 ajax="true"
+                                 update="panel"/>
+                <p:commandButton value="Voltar"
+                                 onclick="history.go(-1)"
+                                 icon="ui-icon-circle-triangle-w">
+                    <p:confirm header="Confirmação" 
+                               icon="ui-icon-circle-triangle-e"
+                               message="Deseja voltar?"/>
+                </p:commandButton>
+            </f:facet>
+        </p:panel>
+
+    </h:form>
+
+</html>

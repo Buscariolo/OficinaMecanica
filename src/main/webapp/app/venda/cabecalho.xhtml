@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+
+    <p:panelGrid columns="1" 
+                 layout="grid" 
+                 style="margin-bottom: 10px;"
+                 columnClasses="coluna10, coluna90">
+        <p:selectOneRadio disabled="#{vendaControle.flag}"
+                          value="#{vendaControle.venda.vendaTipo}"
+                          style="margin: 0 auto;">
+            <f:selectItem itemValue="ORCAMENTO" itemLabel="Orçamento"/>
+            <f:selectItem itemValue="VENDA" itemLabel="Venda"/>
+            <p:ajax update="tab"/>
+        </p:selectOneRadio>
+    </p:panelGrid>
+
+    <p:panelGrid columns="2" 
+                 layout="grid" 
+                 style="margin-bottom: 10px;"
+                 columnClasses="coluna10, coluna90"
+                 id="gridpanel">
+        <p:outputLabel value="Data:" for="data"/>
+        <p:calendar id="data" 
+                    pattern="dd/MM/yyyy" 
+                    disabled="true"
+                    value="#{vendaControle.venda.data}"/>
+
+        <p:outputLabel value="Cliente:" for="cliente"/>
+        <h:panelGroup>
+            <p:autoComplete id="cliente" disabled="#{vendaControle.flag}"
+                            completeMethod="#{clienteControle.clienteAutoComplete}"
+                            value="#{vendaControle.venda.cliente}"
+                            converter="#{clienteControle.converter()}"
+                            var="cliente"
+                            itemLabel="#{cliente.nome_razao}"
+                            itemValue="#{cliente}"
+                            required="true"/>
+            <p:focus for="cliente"/>
+        </h:panelGroup>
+
+        <p:outputLabel value="Funcionário" for="funcionario"/>
+        <h:panelGroup>
+            <p:autoComplete id="funcionario" disabled="#{vendaControle.flag}"
+                            completeMethod="#{funcionarioControle.funcionarioAutoComplete}"
+                            value="#{vendaControle.venda.funcionario}"
+                            converter="#{funcionarioControle.converter()}"
+                            var="funcionario"
+                            itemLabel="#{funcionario.nome}"
+                            itemValue="#{funcionario}"
+                            required="true"/>
+        </h:panelGroup>
+
+        <p:outputLabel value="Desconto:" 
+                       for="desconto"/>
+        <p:inputText id="desconto" disabled="#{vendaControle.flag}"
+                     value="#{vendaControle.venda.desconto}">
+            <f:convertNumber minFractionDigits="2"
+                             maxFractionDigits="2"/>
+            <f:ajax event="keyup" 
+                    listener="#{vendaControle.venda.calculaTotal()}"
+                    render="total"/>
+        </p:inputText>
+
+        <p:outputLabel value="Total Final:" 
+                       for="total"/>
+        <p:inputText id="total" disabled="#{vendaControle.flag}"
+                     value="#{vendaControle.venda.totalfinal}"
+                     readonly="true">
+            <f:convertNumber minFractionDigits="2"
+                             maxFractionDigits="2"
+                             type="currency"
+                             currencySymbol="R$"/>
+        </p:inputText>
+
+        <f:facet name="footer">
+            <p:commandButton value="Salvar"
+                             icon="ui-icon-circle-check"
+                             action="#{vendaControle.salvar()}"
+                             ajax="true"
+                             update="gridpanel"
+                             disabled="#{vendaControle.flag}">
+                <p:confirm header="Confirmação" 
+                           icon="ui-icon-circle-triangle-e"
+                           message="Deseja salvar? Confira se orçamento ou venda está corretamente selecionado"/>
+            </p:commandButton>
+            <p:commandButton value="Voltar"
+                             action="#{vendaControle.voltar()}"
+                             icon="ui-icon-circle-triangle-w"
+                             immediate="true">
+                <p:confirm header="Confirmação" 
+                           icon="ui-icon-circle-triangle-e"
+                           message="Deseja voltar?"/>
+            </p:commandButton> 
+        </f:facet>
+
+    </p:panelGrid>
+
+</html>

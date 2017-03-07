@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <h:form rendered="#{cargoControle.cargo!=null}">
+
+        <p:panel header="Cadastro de Cargo" id="panel">
+            <p:panelGrid columns="2" 
+                         layout="grid"
+                         columnClasses="coluna10, coluna90">
+
+                <p:outputLabel value="Cargo:" 
+                               for="cargo"/>
+                <p:inputText id="cargo" 
+                             value="#{cargoControle.cargo.nome}"
+                             required="true"
+                             styleClass="tamanhocampos"/>
+
+            </p:panelGrid>
+            <f:facet name="footer">
+                <p:commandButton value="Salvar"
+                                 icon="ui-icon-circle-check"
+                                 action="#{cargoControle.salvar()}"
+                                 ajax="true"
+                                 update="panel"/>
+                <p:commandButton value="Voltar"
+                                 onclick="history.go(-1)"
+                                 icon="ui-icon-circle-triangle-w">
+                    <p:confirm header="Confirmação" 
+                               icon="ui-icon-circle-triangle-e"
+                               message="Deseja voltar?"/>
+                </p:commandButton>
+            </f:facet>
+        </p:panel>
+
+    </h:form>
+
+</html>

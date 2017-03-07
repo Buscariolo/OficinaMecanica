@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <p:panelGrid id="itemProd" columns="1" 
+                 layout="grid" 
+                 style="margin-bottom: 10px;"
+                 columnClasses="coluna20, coluna80">
+
+        <p:outputLabel value="Numeração do Produto:" for="produto"/>
+        <p:autoComplete id="produto" disabled="#{vendaControle.flag}"
+                        value="#{vendaControle.itemVenda.produto}"
+                        completeMethod="#{produtoControle.produtoAutoComplete}"
+                        converter="#{produtoControle.converter()}"
+                        var="produto"
+                        itemLabel="#{produto.codigo}"
+                        itemValue="#{produto}"/>
+        <p:focus for="produto" rendered="#{vendaControle.venda.cliente!=null}"/>
+
+        <p:outputLabel value="Quantidade:" for="quant"/>
+        <p:inputText id="quant" value="#{vendaControle.itemVenda.quantidade}" disabled="#{vendaControle.flag}">
+            <f:convertNumber minFractionDigits="0"
+                             maxFractionDigits="0"
+                             integerOnly="true"/>
+        </p:inputText>
+
+        <p:commandButton value="Adicionar"
+                         icon="ui-icon-circle-triangle-s"
+                         process="@parent"
+                         action="#{vendaControle.addItem()}"
+                         update="table2, itemProd, total, table3, desconto"
+                         disabled="#{vendaControle.flag}"/>
+
+    </p:panelGrid>
+
+    <p:dataTable id="table2"
+                 value="#{vendaControle.venda.itensVenda}"
+                 var="item"
+                 paginator="true" rows="5"
+                 rowIndexVar="rowIndex"
+                 emptyMessage="Nenhum registro encontrado">
+
+        <p:column headerText="Numeração do Produto" width="10%" style="text-align:center">
+            <h:outputText value="#{item.produto.codigo}"/>
+        </p:column>
+
+        <p:column headerText="Produto" width="15%" style="text-align:center">
+            <h:outputText value="#{item.produto.nome}"/>
+        </p:column>
+
+        <p:column headerText="Detalhes" width="10%" style="text-align:center">
+            <h:outputText value="#{item.produto.detalhes}"/>
+        </p:column>
+
+        <p:column headerText="Veículos Aplicáveis" width="15%" style="text-align:center">
+            <h:outputText value="#{item.produto.veiculos}"/>
+        </p:column>
+
+        <p:column headerText="Preço" width="10%" style="text-align:center">
+            <h:outputText value="#{item.preco}">
+                <f:convertNumber minFractionDigits="2"
+                                 maxFractionDigits="2"
+                                 type="currency"
+                                 currencySymbol="R$"/>
+            </h:outputText>
+
+        </p:column>
+        <p:column headerText="Quantidade" width="10%" style="text-align:center">
+            <h:outputText value="#{item.quantidade}">
+                <f:convertNumber minFractionDigits="0"
+                                 maxFractionDigits="0"/>
+            </h:outputText>
+        </p:column>
+        
+        <p:column headerText="Estoque" width="10%" style="text-align:center">
+            <h:outputText value="#{item.produto.estoque}">
+                <f:convertNumber minFractionDigits="0"
+                                 maxFractionDigits="0"/>
+            </h:outputText>
+        </p:column>
+
+        <p:column headerText="Remover" width="20%" style="text-align:center">
+            <p:commandButton value="Remover"
+                             icon="ui-icon-circle-triangle-n"
+                             action="#{vendaControle.removeItem(item)}"
+                             ajax="false"
+                             immediate="true"
+                             disabled="#{vendaControle.flag}"/>
+        </p:column>
+
+    </p:dataTable>
+
+</html>
